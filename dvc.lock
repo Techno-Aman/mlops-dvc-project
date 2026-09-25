@@ -33,12 +33,12 @@ stages:
       size: 549
     params:
       params.yaml:
-        train.n_estimators: 200
+        train.n_estimators: 500
     outs:
     - path: model.pkl
       hash: md5
-      md5: 4536135fc7af8d10e4b131b07e37ba8c
-      size: 140865
+      md5: b3c2161ebe9ad99593f6a750b9344ac7
+      size: 348097
   evaluate:
     cmd: python evaluate.py
     deps:
@@ -52,8 +52,8 @@ stages:
       size: 603
     - path: model.pkl
       hash: md5
-      md5: 4536135fc7af8d10e4b131b07e37ba8c
-      size: 140865
+      md5: b3c2161ebe9ad99593f6a750b9344ac7
+      size: 348097
     outs:
     - path: metrics.txt
       hash: md5
