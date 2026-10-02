@@ -1,0 +1,66 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python prepare.py
+    deps:
+    - path: data/california_housing.csv
+      hash: md5
+      md5: fa9fe4cf24f70b69ac65fb33062ddf34
+      size: 1915795
+    - path: prepare.py
+      hash: md5
+      md5: 84a96efe906d68389e763d4472175af7
+      size: 847
+    outs:
+    - path: data/test.csv
+      hash: md5
+      md5: 481cb025b22d7aeff29a2340cd591675
+      size: 478416
+    - path: data/train.csv
+      hash: md5
+      md5: 160d27435c81f7279c2dd43708c1e831
+      size: 1437466
+  train:
+    cmd: python train.py
+    deps:
+    - path: data/train.csv
+      hash: md5
+      md5: 160d27435c81f7279c2dd43708c1e831
+      size: 1437466
+    - path: train.py
+      hash: md5
+      md5: de06ed0cee724c0f9cdf7d92ead69dce
+      size: 1479
+    params:
+      params.yaml:
+        train.n_estimators: 300
+        train.random_state: 42
+    outs:
+    - path: model.pkl
+      hash: md5
+      md5: 5488a31c31d53bf52727334d6d173d5c
+      size: 407084321
+    - path: run_id.txt
+      hash: md5
+      md5: 60a2df3c41dfbcfb936e263d9e7fb249
+      size: 32
+  evaluate:
+    cmd: python evaluate.py
+    deps:
+    - path: data/test.csv
+      hash: md5
+      md5: 481cb025b22d7aeff29a2340cd591675
+      size: 478416
+    - path: evaluate.py
+      hash: md5
+      md5: 525dbacfb230a11169d1589a8eaa7586
+      size: 1003
+    - path: run_id.txt
+      hash: md5
+      md5: 60a2df3c41dfbcfb936e263d9e7fb249
+      size: 32
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: 55dec6b9e7b8dd2d0cf8d669f4ce8ca8
+      size: 100

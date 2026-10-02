@@ -1,0 +1,32 @@
+stages :
+  prepare :
+    cmd : python prepare.py
+    deps :
+      - prepare.py
+      - data/california_housing.csv
+    outs :
+      - data/train.csv
+      - data/test.csv
+
+  train :
+    cmd : python train.py
+    params :
+      - train.n_estimators
+      - train.random_state
+    deps :
+      - train.py
+      - data/train.csv
+
+    outs :
+      - model.pkl
+      - run_id.txt
+    
+    
+  evaluate :
+    cmd : python evaluate.py
+    deps :
+      - evaluate.py
+      - data/test.csv
+      - run_id.txt
+    metrics :
+      - metrics.json

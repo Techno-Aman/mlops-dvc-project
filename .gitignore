@@ -1,3 +1,6 @@
 .venv/
 __pycache__/
 *.pyc
+/model.pkl
+/metrics.json
+/run_id.txt
