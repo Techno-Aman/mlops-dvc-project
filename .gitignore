@@ -1,6 +1,13 @@
+# Python environment and cache
 .venv/
 __pycache__/
 *.pyc
+
+# Generated model and evaluation files
 /model.pkl
 /metrics.json
 /run_id.txt
+
+# Local MLflow tracking data
+/mlartifacts/
+/mlflow.db/
